@@ -1,8 +1,27 @@
-const { log } = require('console');
-const express = require('express');
-const app = express();
-const path = require('path');
+const mongoose = require("mongoose")
 
-app.listen(3000,()=>{
-    console.log("Port is Connected");
+mongoose.connect('mongodb://localhost:27017')
+.then(()=>{
+    console.log("Mongodb Connected");
 })
+.catch(()=>{
+    console.log("Not Connected");
+})
+
+const loginSchema = mongoose.Schema({
+    name:{
+        type:String,
+        required:true
+    },
+    password:{
+        type:String,
+        required:true
+    }
+
+})
+
+
+
+const collection = mongoose.model("form",loginSchema);
+
+module.exports = collection
